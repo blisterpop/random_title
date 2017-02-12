@@ -1,9 +1,12 @@
 <!DOCTYPE html>
+<meta name="viewport" content="width=device-width">
+<link href="https://fonts.googleapis.com/css?family=Oswald:500" rel="stylesheet">
 <style>
   html {
     background-color: black;
     color: white;
     text-align: center;
+    font-family: sans-serif;
   }
   @keyframes zoomIn {
     0% {
@@ -15,28 +18,36 @@
     }
   }
   .zoom {
-    font-family: Impact, Charcoal, sans-serif;
-    font-size: 8em;
+    /* Oswald is a good fallback for mobile */
+    font-family: Impact, Charcoal, Oswald, sans-serif;
+    /* Sets font size relative to viewport, with em fallback */
+    font-size: 5em;
+    font-size: 15vw;
     animation-duration: 0.4s;
     animation-fill-mode: both;
     animation-name: zoomIn;
+  }
+  button {
+    font-size: 1em;
   }
   button.invisible {
     background: transparent;
     border: none !important;
   }
   button.invisible:focus {
-    outline:0 !important;
+    outline: 0 !important;
+  }
+  button.invisible:disabled {
+    color: black;
   }
   a {
-    font-size: small;
-    font-family: sans-serif;
+    font-size: 1em;
   }
   a.invisible {
     color: black;
   }
   .controls {
-    height: 5em;
+    height: 4em;
   }
 </style>
 <script src="common_words.js"></script>
@@ -68,6 +79,7 @@
       addWord(adjective);
       setTimeout(function() { addWord(noun); }, 200);
       setTimeout(function() {
+        againButton.disabled = false;
         againButton.className = '';
         githubLink.className = '';
       }, 700);
@@ -75,6 +87,7 @@
 
     generateTitle();
     againButton.onclick = function() {
+      againButton.disabled = true;
       againButton.className = 'invisible';
       githubLink.className = 'invisible';
       const elements = document.getElementsByClassName('zoom');
@@ -97,13 +110,11 @@
 
   </script>
   <div class="controls">
-    <p>
-      <a id="github" href="https://github.com/bsutherland/random_title" class="invisible">
-        Project page on GitHub
-      </a>
-    </p>
-    <p>
-      <button id="again" class="invisible">One more!</button>
-    </p>
+    <a id="github" href="https://github.com/bsutherland/random_title" class="invisible">
+      Project page on GitHub
+    </a>
+  </div>
+  <div class="controls">
+    <button id="again" class="invisible">One more!</button>
   </div>
 </body>
