@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<style>
+  body {
+    background-color: black;
+    color: white;
+    font-family: Impact, Charcoal, sans-serif;
+    font-size: 8em;
+    text-align: center;
+  }
+  @keyframes zoomIn {
+    0% {
+      opacity: 0;
+      transform: scale3d(.3, .3, .3);
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  .zoom {
+    animation-duration: 0.4s;
+    animation-fill-mode: both;
+    animation-name: zoomIn;
+  }
+  button.invisible {
+    background: transparent;
+    border: none !important;
+  }
+  button.invisible:focus {
+    outline:0 !important;
+  }
+</style>
+<script src="https://raw.githubusercontent.com/bsutherland/random_title/master/common_words.js"></script>
+<script>
+  window.onload = function() {
+    const againButton = document.getElementById('again');
+    const sample = function(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    };
+    const capitalize = function(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    };
+    const addWord = function(word) {
+      const element = document.createElement('div');
+      document.body.appendChild(element);
+      element.className = 'zoom';
+      element.innerHTML = word;
+    };
+
+    const generateTitle = function() {
+      const adjective = capitalize(sample(COMMON_ADJECTIVES));
+      const noun = capitalize(sample(COMMON_NOUNS));
+      const adjectiveDiv = document.getElementById('adjective');
+      const nounDiv = document.getElementById('noun');
+
+      window.document.title = adjective + ' ' + noun;
+
+      addWord(adjective);
+      setTimeout(function() { addWord(noun); }, 200);
+      setTimeout(function() { againButton.className = ''; }, 700);
+    };
+
+    generateTitle();
+    againButton.onclick = function() {
+      againButton.className = 'invisible';
+      const elements = document.getElementsByClassName('zoom');
+      while(elements[0]) {
+        elements[0].parentNode.removeChild(elements[0]);
+      }
+      generateTitle();
+    };
+  }
+</script>
+<body>
+  <button id="again" class="invisible">One more!</button>
+</body>
