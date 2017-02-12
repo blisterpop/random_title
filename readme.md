@@ -1,10 +1,6 @@
 # Random Title
 
-Generates random titles for stories, movies, games, songs, bands, etc.
-
-## Usage
-
-Try it [here](https://htmlpreview.github.io/?https://github.com/bsutherland/random_title/master/random_title.html)
+Generates random titles for stories, movies, games, songs, bands, etc. Try it [here](https://bsutherland.github.io/random_title/).
 
 ## Motivation
 

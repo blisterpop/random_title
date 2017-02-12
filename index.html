@@ -37,6 +37,9 @@
   button.invisible:focus {
     outline: 0 !important;
   }
+  button.invisible:disabled {
+    color: black;
+  }
   a {
     font-size: 1em;
   }
@@ -76,6 +79,7 @@
       addWord(adjective);
       setTimeout(function() { addWord(noun); }, 200);
       setTimeout(function() {
+        againButton.disabled = false;
         againButton.className = '';
         githubLink.className = '';
       }, 700);
@@ -83,6 +87,7 @@
 
     generateTitle();
     againButton.onclick = function() {
+      againButton.disabled = true;
       againButton.className = 'invisible';
       githubLink.className = 'invisible';
       const elements = document.getElementsByClassName('zoom');
